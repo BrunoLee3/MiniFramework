@@ -1,0 +1,18 @@
+{
+    "name": "miniframework",
+    "require": {
+        "php": ">= 7.0"
+    },
+    "authors": [
+        {
+            "name": "Bruno Lee",
+            "email": "lee.bruno23@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/", 
+            "MF\\": "vendor/MF/"
+        }
+    }
+}
