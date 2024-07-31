@@ -2,33 +2,34 @@
 
 namespace App\Controllers;
 
-class IndexController{
+use MF\Controller\Action;
+use MF\Model\Container;
+use App\Models\Produto;
+use App\Models\Info;
 
-    private $view;
-
-    public function __construct(){
-        $this->view = new \stdClass();
-    }
+class IndexController extends Action{
 
     public function index(){
 
-        $this->view->dados = ['Sofá', 'Cadeira', 'Cama'];
-        $this->render('index');
+        $produto = Container::getModel('Produto');
+
+        $produtos = $produto->getProdutos();
+
+        $this->view->dados = $produtos;
+
+        $this->render('index', 'layout1');
     }
 
     public function sobreNos(){
 
-        $this->view->dados = ['Notebook', 'Smartphone'];
-        $this->render('sobreNos');
+        $info = Container::getModel('Info');
+
+        $informacoes = $info->getInfo();
+
+        $this->view->dados = $informacoes;
+
+        $this->render('sobreNos', 'layout2');
     }
 
-    public function render($view){
-        $classeAtual = get_class($this);
-
-        $classeAtual = str_replace('App\\Controllers\\', '', $classeAtual);
-
-        $classeAtual  = strtolower(str_replace('Controller', '', $classeAtual));
-
-        require_once "../App/Views/".$classeAtual."/".$view.".phtml";
-    }
+    
 }
